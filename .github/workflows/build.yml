@@ -6,19 +6,15 @@ on:
       - 'master'
   pull_request:
 
-env:
-  REGISTRY: rapportus
-  REPOSITORY: subsync
-
 jobs:
-  push_to_registry:
-    name: Push Docker image to Docker Hub
+  build:
+    name: Build Image
     runs-on: ubuntu-latest
     steps:
       - name: Check out the repo
         uses: actions/checkout@v3
       
-      - name: Build and push Docker image
+      - name: Docker Build
         uses: docker/build-push-action@v4
         with:
           context: .
