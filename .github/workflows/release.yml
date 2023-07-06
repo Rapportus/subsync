@@ -40,12 +40,6 @@ jobs:
           file: ./Dockerfile
           push: false
           tags: subsync:local # referenced in .releaserc.json
-          
-      - name: Log in to Docker Hub
-        uses: docker/login-action@v2
-        with:
-          username: ${{ secrets.DOCKER_USER }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Release
         uses: cycjimmy/semantic-release-action@v3
@@ -58,3 +52,5 @@ jobs:
             @semantic-release-plus/docker@3.1.2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USER }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
