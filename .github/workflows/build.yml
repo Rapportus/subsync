@@ -23,4 +23,4 @@ jobs:
           context: .
           file: ./Dockerfile
           push: false
-          tags: subsync:local
+          tags: rapportus/subsync:local

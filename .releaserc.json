@@ -43,8 +43,7 @@
         [
             "@semantic-release-plus/docker",
             {
-                "name": "subsync:local",
-                "registry": "rapportus"
+                "name": "rapportus/subsync:local"
             }
         ]
     ]

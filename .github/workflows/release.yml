@@ -39,7 +39,7 @@ jobs:
           context: .
           file: ./Dockerfile
           push: false
-          tags: subsync:local # referenced in .releaserc.json
+          tags: rapportus/subsync:local # referenced in .releaserc.json
 
       - name: Release
         uses: cycjimmy/semantic-release-action@v3
