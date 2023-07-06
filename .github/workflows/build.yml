@@ -2,6 +2,12 @@ name: Build Docker image
 
 on:
   pull_request:
+    paths:
+      - '**/*.py'
+      - '**/.dockerignore'
+      - '**/Dockerfile'
+      - '**/subsync/**'
+      - '.github/workflows/build.yml'
 
 jobs:
   build:
