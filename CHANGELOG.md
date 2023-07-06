@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.0.0](https://github.com/Rapportus/subsync/compare/v1.0.0...v2.0.0) (2023-07-06)
+
+
+### ⚠ BREAKING CHANGES
+
+* bump to 2.0.0 (#7)
+
+### Features
+
+* bump to 2.0.0 ([#7](https://github.com/Rapportus/subsync/issues/7)) ([75055fd](https://github.com/Rapportus/subsync/commit/75055fd6448f4c875289d9510b40afa76308b74d))
+
 ## 1.0.0 (2023-07-06)
 
 
