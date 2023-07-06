@@ -2,6 +2,8 @@ import argparse
 import os
 
 from .log import logger, init_logger
+from .media import Media
+from .net import NeuralNet
 from .version import __version__
 
 
@@ -87,17 +89,12 @@ def run():
     if args.logfile:
         init_logger(args.logfile)
 
-    from .media import Media
-
     if not os.path.exists(args.media):
         raise ValueError(f"{args.media} does not exist")
     if not os.path.exists(args.srt):
         raise ValueError(f"{args.srt} does not exist")
 
     media = Media(filepath=args.media, subtitles=[args.srt])
-
-    from .net import NeuralNet
-
     model = NeuralNet()
 
     if args.recursive:
