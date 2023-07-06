@@ -20,3 +20,4 @@ jobs:
           context: .
           file: ./Dockerfile
           push: false
+          tags: subsync:local

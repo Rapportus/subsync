@@ -1,0 +1,60 @@
+name: Release
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - master
+    paths:
+      - '**/*.py'
+      - '**/.dockerignore'
+      - '**/Dockerfile'
+      - '**/subsync/**'
+      - '.github/workflows/release.yml'
+
+env:
+  REGISTRY: rapportus
+  REPOSITORY: subsync
+
+jobs:
+  push_to_registry:
+    name: Push Docker image to Docker Hub
+    runs-on: ubuntu-latest
+    
+    # https://github.com/semantic-release/github
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
+    
+    # Skip running release workflow on forks
+    if: github.repository_owner == 'Rapportus'
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v3
+      
+      - name: Docker Build
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          file: ./Dockerfile
+          push: false
+          tags: subsync:local # referenced in .releaserc.json
+          
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_USER }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Release
+        uses: cycjimmy/semantic-release-action@v3
+        with:
+          semantic_version: 18.0.0
+          extra_plugins: |
+            @semantic-release/changelog@6.0.0
+            @semantic-release/git@10.0.0
+            conventional-changelog-conventionalcommits@4.6.3
+            @semantic-release-plus/docker@3.1.2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
